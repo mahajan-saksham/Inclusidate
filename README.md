@@ -13,10 +13,9 @@ Open http://localhost:5173 (or the port shown in terminal)
 
 ## 📱 Features
 
-- **Landing Page**: Problem showcase and navigation to 3 main flows
-- **Profile Super-Power**: Transform disability into dating strength (placeholder)
-- **Smart-Call**: Intelligent video calling with captions (placeholder)
-- **No Boundaries**: Connect beyond limitations (placeholder)
+- **Landing Page**: Get started section and problem showcase
+- **No Boundaries**: Connect beyond limitations (Feature #1)
+- **Profile Super-Power**: Transform disability into dating strength (Feature #2)
 
 ## 🎨 Design
 
@@ -35,4 +34,4 @@ Open http://localhost:5173 (or the port shown in terminal)
 
 ## 📄 Next Steps
 
-Add the 3 remaining screen prototypes to complete the app!
+Complete the No Boundaries and Profile Super-Power flows!

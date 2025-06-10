@@ -1,0 +1,11 @@
+# Install additional icon and illustration libraries
+
+npm install --save react-undraw-illustrations @tabler/icons-react heroicons-react
+
+# These libraries provide:
+# - react-undraw-illustrations: 100+ customizable SVG illustrations
+# - @tabler/icons-react: 3000+ free SVG icons
+# - heroicons-react: Beautiful hand-crafted SVG icons by makers of Tailwind CSS
+
+# Run this command in your terminal at the project root:
+# /Users/sakshammahajan/Desktop/inclusidate

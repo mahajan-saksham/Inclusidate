@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Medal, VideoCamera, Infinity, BookOpen, Heart, Sparkle, HandsClapping } from 'phosphor-react';
+import { 
+  Medal, Infinity, BookOpen, Heart, Sparkle, HandsClapping,
+  Timer, ChatCircleText, TextAlignLeft, BellSlash, Lightning,
+  Brain, Question, Newspaper, Star
+} from 'phosphor-react';
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -10,64 +14,62 @@ const Landing = () => {
   const problems = [
     { 
       id: 1, 
-      emoji: "😴", 
+      icon: Timer,
+      iconColor: "text-coral", 
       title: "Caption Fatigue", 
       description: "Auto-captions drain focus",
       color: "bg-coral-light/20 hover:bg-coral-light/30"
     },
     { 
       id: 2, 
-      emoji: "💭", 
+      icon: Question,
+      iconColor: "text-plum", 
       title: "Disclosure Anxiety", 
       description: "When do I reveal I'm Deaf?",
       color: "bg-plum-light/20 hover:bg-plum-light/30"
     },
     { 
       id: 3, 
-      emoji: "📱", 
+      icon: TextAlignLeft,
+      iconColor: "text-mint", 
       title: "Text-Only First Impressions", 
       description: "Missing the full picture",
       color: "bg-mint-light/20 hover:bg-mint-light/30"
     },
     { 
       id: 4, 
-      emoji: "🔕", 
+      icon: BellSlash,
+      iconColor: "text-honey", 
       title: "Missed Audio Alerts", 
       description: "Important notifications lost",
       color: "bg-honey-light/20 hover:bg-honey-light/30"
     },
     { 
       id: 5, 
-      emoji: "✨", 
+      icon: Star,
+      iconColor: "text-coral", 
       title: "Negative Framing", 
       description: "Changing the narrative",
       color: "bg-coral-light/20 hover:bg-coral-light/30"
     }
   ];
+
   const flowButtons = [
     { 
       id: 1, 
-      label: "Profile Super-Power", 
-      subtitle: "Stand out authentically",
-      icon: Medal, 
-      route: "/profile-flow",
-      gradient: "bg-honey-gradient hover:shadow-honey"
-    },
-    { 
-      id: 2, 
-      label: "Smart-Call", 
-      subtitle: "Video dates made easy",
-      icon: VideoCamera, 
-      route: "/smart-call",
-      gradient: "bg-plum-gradient hover:shadow-bumble"
-    },
-    { 
-      id: 3, 
       label: "No Boundaries", 
       subtitle: "Connect beyond limits",
       icon: Infinity, 
       route: "/no-boundaries",
       gradient: "bg-gradient-to-br from-mint to-plum-light hover:shadow-bumble"
+    },
+    { 
+      id: 2, 
+      label: "Profile Super-Power", 
+      subtitle: "Stand out authentically",
+      icon: Medal, 
+      route: "/profile-flow",
+      gradient: "bg-honey-gradient hover:shadow-honey"
     }
   ];
 
@@ -99,7 +101,7 @@ const Landing = () => {
             </h1>
             
             <p className="text-lg text-charcoal/80 font-medium animate-fade-up animation-delay-150">
-              3 micro-flows that turn<br />
+              2 micro-flows that turn<br />
               inclusion into <span className="text-plum font-bold">attraction</span>
             </p>
             
@@ -112,8 +114,69 @@ const Landing = () => {
             </div>
           </div>
         </div>
-        {/* Problem Section - Updated Layout */}
+
+        {/* Get Started Section - Moved Above */}
         <div className="px-6 pt-8 pb-4">
+          <h2 className="text-sm font-bold text-text-muted uppercase tracking-wider mb-5">
+            Get Started
+          </h2>
+          
+          <div className="space-y-4">
+            {flowButtons.map((button, index) => {
+              const Icon = button.icon;
+              const isHovered = hoveredButton === button.id;
+              
+              return (
+                <button
+                  key={button.id}
+                  onClick={() => navigate(button.route)}
+                  onMouseEnter={() => setHoveredButton(button.id)}
+                  onMouseLeave={() => setHoveredButton(null)}
+                  className={`relative group ${button.gradient} text-white rounded-bubble 
+                    w-full min-h-[140px] p-5 shadow-medium transition-all duration-300
+                    ${isHovered ? 'scale-105' : 'scale-100'}
+                    hover:shadow-float active:scale-95
+                    flex flex-col items-start justify-between
+                    animate-scale-in overflow-hidden`}
+                  style={{ animationDelay: `${300 + index * 100}ms` }}
+                >
+                  {/* Background decoration */}
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full 
+                    -translate-y-12 translate-x-12 group-hover:scale-150 transition-transform duration-500" />
+                  
+                  {/* Icon with number */}
+                  <div className="flex items-start justify-between w-full">
+                    <Icon 
+                      size={28} 
+                      weight={isHovered ? "fill" : "duotone"}
+                      className="transition-all duration-300"
+                    />
+                    <span className="text-xs font-bold opacity-60">
+                      {`0${button.id}`}
+                    </span>
+                  </div>
+                  
+                  {/* Label and subtitle */}
+                  <div className="text-left">
+                    <h3 className="font-display font-bold text-base mb-1">
+                      {button.label}
+                    </h3>
+                    <p className="text-xs opacity-90">
+                      {button.subtitle}
+                    </p>
+                  </div>
+                  
+                  {/* Hover indicator */}
+                  <div className={`absolute bottom-3 right-3 w-2 h-2 bg-white rounded-full
+                    transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Problem Section - Moved Below */}
+        <div className="px-6 pt-4 pb-8">
           <h2 className="text-sm font-bold text-text-muted uppercase tracking-wider mb-4">
             We're Solving
           </h2>
@@ -129,10 +192,12 @@ const Landing = () => {
                   transition-all duration-300 cursor-pointer
                   ${hoveredCard === problem.id ? 'scale-[1.02] shadow-medium' : 'shadow-soft'}
                   animate-scale-in`}
-                style={{ animationDelay: `${index * 80}ms` }}
+                style={{ animationDelay: `${500 + index * 80}ms` }}
               >
                 {/* Icon on left */}
-                <div className="text-3xl flex-shrink-0">{problem.emoji}</div>
+                <div className="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center flex-shrink-0">
+                  <problem.icon size={24} weight="duotone" className={problem.iconColor} />
+                </div>
                 
                 {/* Text on right */}
                 <div className="flex-1 text-left">
@@ -147,133 +212,8 @@ const Landing = () => {
             ))}
           </div>
         </div>
-        {/* Flow Buttons - Updated Layout */}
-        <div className="px-6 pt-4 pb-8">
-          <h2 className="text-sm font-bold text-text-muted uppercase tracking-wider mb-5">
-            Get Started
-          </h2>
-          
-          <div className="space-y-4">
-            {/* Profile Super-Power - Full Width */}
-            <button
-              onClick={() => navigate(flowButtons[0].route)}
-              onMouseEnter={() => setHoveredButton(flowButtons[0].id)}
-              onMouseLeave={() => setHoveredButton(null)}
-              className={`relative group ${flowButtons[0].gradient} text-white rounded-bubble 
-                w-full min-h-[140px] p-5 shadow-medium transition-all duration-300
-                ${hoveredButton === flowButtons[0].id ? 'scale-105' : 'scale-100'}
-                hover:shadow-float active:scale-95
-                flex flex-col items-start justify-between
-                animate-scale-in overflow-hidden`}
-              style={{ animationDelay: `300ms` }}
-            >
-              {/* Background decoration */}
-              <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full 
-                -translate-y-12 translate-x-12 group-hover:scale-150 transition-transform duration-500" />
-              
-              {/* Icon with number */}
-              <div className="flex items-start justify-between w-full">
-                <Medal 
-                  size={28} 
-                  weight={hoveredButton === flowButtons[0].id ? "fill" : "duotone"}
-                  className="transition-all duration-300"
-                />
-                <span className="text-xs font-bold opacity-60">01</span>
-              </div>
-              
-              {/* Label and subtitle */}
-              <div className="text-left">
-                <h3 className="font-display font-bold text-base mb-1">
-                  {flowButtons[0].label}
-                </h3>
-                <p className="text-xs opacity-90">
-                  {flowButtons[0].subtitle}
-                </p>
-              </div>
-              
-              {/* Hover indicator */}
-              <div className={`absolute bottom-3 right-3 w-2 h-2 bg-white rounded-full
-                transition-all duration-300 ${hoveredButton === flowButtons[0].id ? 'opacity-100' : 'opacity-0'}`} />
-            </button>
-            
-            {/* Smart-Call and No Boundaries - Side by Side */}
-            <div className="grid grid-cols-2 gap-4">
-              {flowButtons.slice(1).map((button, index) => {
-                const Icon = button.icon;
-                const isHovered = hoveredButton === button.id;
-                
-                return (
-                  <button
-                    key={button.id}
-                    onClick={() => navigate(button.route)}
-                    onMouseEnter={() => setHoveredButton(button.id)}
-                    onMouseLeave={() => setHoveredButton(null)}
-                    className={`relative group ${button.gradient} text-white rounded-bubble 
-                      min-h-[140px] p-5 shadow-medium transition-all duration-300
-                      ${isHovered ? 'scale-105' : 'scale-100'}
-                      hover:shadow-float active:scale-95
-                      flex flex-col items-start justify-between
-                      animate-scale-in overflow-hidden`}
-                    style={{ animationDelay: `${400 + index * 100}ms` }}
-                  >
-                    {/* Background decoration */}
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full 
-                      -translate-y-12 translate-x-12 group-hover:scale-150 transition-transform duration-500" />
-                    
-                    {/* Icon with number */}
-                    <div className="flex items-start justify-between w-full">
-                      <Icon 
-                        size={28} 
-                        weight={isHovered ? "fill" : "duotone"}
-                        className="transition-all duration-300"
-                      />
-                      <span className="text-xs font-bold opacity-60">
-                        {`0${button.id}`}
-                      </span>
-                    </div>
-                    
-                    {/* Label and subtitle */}
-                    <div className="text-left">
-                      <h3 className="font-display font-bold text-base mb-1">
-                        {button.label}
-                      </h3>
-                      <p className="text-xs opacity-90">
-                        {button.subtitle}
-                      </p>
-                    </div>
-                    
-                    {/* Hover indicator */}
-                    <div className={`absolute bottom-3 right-3 w-2 h-2 bg-white rounded-full
-                      transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-        {/* Footer */}
-        <div className="px-6 pb-8">
-          <div className="bg-smoke-dark rounded-bubble p-6 text-center">
-            <div className="flex justify-center mb-3">
-              <div className="flex -space-x-2">
-                <div className="w-8 h-8 bg-honey rounded-full flex items-center justify-center">
-                  <span className="text-xs">♿</span>
-                </div>
-                <div className="w-8 h-8 bg-plum rounded-full flex items-center justify-center">
-                  <span className="text-xs text-white">✓</span>
-                </div>
-                <div className="w-8 h-8 bg-mint rounded-full flex items-center justify-center">
-                  <span className="text-xs">48</span>
-                </div>
-              </div>
-            </div>
-            
-            <p className="text-xs text-text-secondary leading-relaxed">
-              Built with <span className="font-bold text-charcoal">WCAG 2.1-AA</span> compliance<br />
-              48px tap targets • High contrast • Screen reader ready
-            </p>
-          </div>
-        </div>
+
+        {/* Footer section was removed */}
         
       </div>
     </div>

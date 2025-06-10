@@ -20,6 +20,7 @@ export default {
         'mint-light': '#7EDDD7',
         'charcoal': '#1A1A1A',
         'smoke': '#F8F8F8',
+        'smoke-light': '#FAFAFA',
         'smoke-dark': '#EFEFEF',
         'text-primary': '#1A1A1A',
         'text-secondary': '#666666',
